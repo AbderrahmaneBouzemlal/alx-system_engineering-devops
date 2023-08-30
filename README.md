@@ -1,2 +1,1 @@
-# alx-system_engineering-devops
-in this project we will apply some bash scripting
+#alx-system_engineering_devops/n  this project we are going through the bash scripting
