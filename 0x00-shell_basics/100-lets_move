@@ -1,2 +1,2 @@
 #!/bin/bash
-find -mindepth 0 -regextype '^[A-Z]{1}[a-z1-9]*' -exec mv {} /tmp/u +
+find . -mindepth 1 -type f -regex '.*/^[A-Z]{1}[a-z0-9]*' -exec mv -t /tmp/u {} +
