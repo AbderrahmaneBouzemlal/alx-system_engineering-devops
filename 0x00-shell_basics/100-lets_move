@@ -1,0 +1,2 @@
+#!/bin/bash
+find -mindepth 0 -regextype '[A-Z]*' -exec mv {} /tmp/u +
