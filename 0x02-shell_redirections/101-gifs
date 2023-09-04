@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type f -name "*.gif" -printf '%f\n' -exec sh -c 'echo "${0%.*}"' {} +| sort -nf
+find . -type f -iname '*.gif' | awk -F/ '{print $NF}' | sed 's/\.gif$//' | LC_COLLATE=C sort -f
