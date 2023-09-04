@@ -1,3 +1,4 @@
 #!/bin/bash
-echo -e "Best School\n" > \*\\\'\"Best School\"\'\\\*\$\?\*\*\*\*\*\:\)
-
+file_name='\*\\"'"Best School"'"\\*\$?*****:)'
+file_content="Best School\n"
+echo -e "$file_content" > "$file_name"
