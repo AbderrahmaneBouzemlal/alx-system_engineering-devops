@@ -1,0 +1,3 @@
+#!/bin/bash
+first_letter="${line:0:1}"
+printf "%s" "$first_letter"
