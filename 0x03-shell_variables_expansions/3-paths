@@ -1,2 +1,2 @@
 #!/bin/bash
-find $path -type d -exec wc -l {} +
+find $PATH -type d -exec 
