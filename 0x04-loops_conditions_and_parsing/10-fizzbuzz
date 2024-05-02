@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# displays numbers from 1 t9 100 with little spicies
+x=1
+f=1
+b=1
+while [ $x -le 100 ]
+do
+	(("f= $x % 3"))
+	(("b= $x % 5"))
+	if [ "$f" -eq 0 ] && [ "$b" -eq 0 ]
+	then
+		echo "FizzBuzz"
+	elif [ "$f" -eq 0 ]
+	then
+		echo "Fizz"
+	elif [ "$b" -eq 0 ]
+	then
+		echo "Buzz"
+	else
+		echo "$x"
+	fi
+	((x++))
+done
