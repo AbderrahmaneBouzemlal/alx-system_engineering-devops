@@ -2,5 +2,5 @@
 #display the content of the directory as a list
 for file in *
 do
-	echo "$file"
+	echo "$file" | cut -d'-' -f2
 done
