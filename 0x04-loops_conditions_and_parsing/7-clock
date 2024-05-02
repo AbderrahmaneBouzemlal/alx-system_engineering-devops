@@ -5,13 +5,10 @@ while [ $hour -le 12 ]
 do
 	echo "Hour: $hour"
 	minute=1
-	if [ $hour -ne 12 ]
-	then
-		while [ $minute -le 59 ]
-		do
-			echo $minute
-			((minute++))
-		done
-	fi
+	while [ $minute -le 59 ]
+	do
+		echo $minute
+		((minute++))
+	done
 	((hour++))
 done
