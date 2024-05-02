@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#displays a statement 10 times
+x=1
+until [ $x -gt 10 ]
+do
+	echo "Best School"
+	((x++))
+done
