@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# tik tok the clock is ticking
+hour=0
+while [ $hour -le 12 ]
+do
+	echo "Hour: $hour"
+	minute=1
+	if [ $hour -ne 12 ]
+	then
+		while [ $minute -le 59 ]
+		do
+			echo $minute
+			((minute++))
+		done
+	fi
+	((hour++))
+done
