@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# read a file and display it with a change
+file="/etc/passwd"
+cut -d ':' -f 1,3,6 $file
