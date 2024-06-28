@@ -1,6 +1,6 @@
 # installing flask using puppet
 package { 'Flask':
-  ensure   => 'latest',
+  ensure   => '2.1.0',
   provider => 'pip3',
 }
 
