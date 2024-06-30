@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#This Script configure the local SSH client by editing the cofiguration file
+file='/etc/ssh/sshd_config'
+path='~/.ssh/school'
+sed -i "s/^IdentityFile.*/IdentityFile ${path}/" $file
+sed -i "s/^PasswordAuthentication.*/PasswordAuthentication no"
+
