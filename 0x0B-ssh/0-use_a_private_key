@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#This script let the user ubuntu connect to the server using a private key
+cat ~/.ssh/school | ssh ubuntu@54.198.53.210 "mkdir -p ~/.ssh/authorized_keys"
+
