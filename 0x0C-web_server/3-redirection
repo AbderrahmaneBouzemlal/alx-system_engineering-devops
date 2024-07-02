@@ -1,18 +1,54 @@
 #!/usr/bin/env bash
-# Install nginx and start it
-apt-get -y install nginx
+# Update package lists
+sudo apt-get update
 
-# Firewall setting: Allow Nginx to serve on HTTP
-ufw allow 'Nginx HTTP'
+# Install Nginx
+sudo apt-get install -y nginx
 
-# Override the default index file served as home page
-echo "Holberton School" >> /var/www/html/index.html
+# Create the HTML file to be served by Nginx
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-#Give the user  ownership to website files
-sudo chown -R $USER:$USER /var/www/html
-sudo chmod -R 755 /var/www
+# Create a new Nginx server block configuration
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOL
+server {
+    listen 80;
+    listen [::]:80 default_server;
 
-# Redirect to /redirect_me to a youtube video
-sed -i '37i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+    root /var/www/html;
+    index index.html;
 
-service nginx start
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4
+    }
+}
+EOL
+
+# Check Nginx configuration for syntax errors
+sudo nginx -t
+
+# If the configuration is correct, reload Nginx to apply changes
+if [ $? -eq 0 ]; then
+    sudo nginx -s reload
+else
+    echo "Nginx configuration test failed. Exiting."
+    exit 1
+fi
+
+# Ensure the firewall allows traffic on port 80
+sudo ufw allow 'Nginx HTTP'
+
+# Verify Nginx is running
+sudo service nginx status
+
+# Verify Nginx is serving the "Hello World!" page
+curl -I http://localhost
+
+# Verify Nginx is redirecting /redirect_me
+curl -I http://localhost/redirect_me
+
