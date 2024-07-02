@@ -1,19 +1,9 @@
 #!/usr/bin/env bash
 #install and configure Nginx web-server
-sudo apt-get update
 sudo apt-get install -y nginx
 
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Ensure Nginx is listening on port 80 (default configuration)
 sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
-
-# Check Nginx configuration for syntax errors
-sudo nginx -t
-
-# Reload Nginx to apply changes
-sudo nginx -s reload
-
-# Verify Nginx is serving the "Hello World!" page
-curl -I http://localhost
 
