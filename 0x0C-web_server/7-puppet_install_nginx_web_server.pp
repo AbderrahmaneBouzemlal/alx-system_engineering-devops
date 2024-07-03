@@ -5,7 +5,7 @@ package { 'nginx':
 }
 
 file { '/var/www/html/index.html':
-  content => 'Holberton School',
+  content => 'Hello, world!',
 }
 
 file_line { 'aaaaa':
