@@ -1,28 +1,24 @@
 #!/usr/bin/env bash
-# Update package lists
+# install and configure nginx webserver to redirect and function to a certain requirements
 sudo apt-get update
 # Install Nginx
 sudo apt-get install -y nginx
-
 echo "Hello World!" | sudo tee /var/www/html/index.html
-
 # Ensure Nginx is listening on port 80 (default configuration)
 sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
-
 # Add the redirect location using sed
 sed -i '37i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
 # Check Nginx configuration for syntax errors
 sudo nginx -t
-
 # Ensure the firewall allows traffic on port 80
 sudo ufw allow 'Nginx HTTP'
-
 # Verify Nginx is running
 sudo service nginx status
-
 # Verify Nginx is serving the "Hello World!" page
 curl -I http://localhost
-
 # Verify Nginx is redirecting /redirect_me
 curl -I http://localhost/redirect_me
+echo "Hello World!" | sudo tee /var/www/html/index.html
+# Ensure Nginx is listening on port 80 (default configuration)
+sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
 
