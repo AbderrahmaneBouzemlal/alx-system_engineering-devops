@@ -4,33 +4,22 @@ sudo apt-get update
 # Install Nginx
 sudo apt-get install -y nginx
 # Create the custom 404 error page
+# Create the custom 404 error page
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
-# Create a new Nginx server block configuration
-sudo tee /etc/nginx/sites-available/default > /dev/null <<EOL
-server {
-    listen 80;
-    listen [::]:80 default_server;
 
-    root /var/www/html;
-    index index.html;
+# Modify the Nginx default server block configuration using sed
+sudo sed -i '/server {/a \
+    error_page 404 /custom_404.html;\
+    location = /custom_404.html {\
+        internal;\
+    }' /etc/nginx/sites-available/default
 
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    error_page 404 /custom_404.html;
-    location = /custom_404.html {
-        internal;
-    }
-
-    location /redirect_me {
-        return 301 http://youtube.com/watch?v=QH2-TGUlwu4;
-    }
-}
-EOL
-
+# Add the redirect location using sed
+sudo sed -i '/server {/a \
+    location /redirect_me {\
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4
+;\
+    }' /etc/nginx/sites-available/default
 # Check Nginx configuration for syntax errors
 sudo nginx -t
 

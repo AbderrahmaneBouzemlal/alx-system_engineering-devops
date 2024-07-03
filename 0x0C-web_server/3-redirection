@@ -9,26 +9,15 @@ sudo apt-get install -y nginx
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Create a new Nginx server block configuration
-sudo tee /etc/nginx/sites-available/default > /dev/null <<EOL
-server {
-    listen 80;
-    listen [::]:80 default_server;
+# Create the custom 404 error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
 
-    root /var/www/html;
-    index index.html;
-
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    location /redirect_me {
+# Add the redirect location using sed
+sudo sed -i '/server {/a \
+    location /redirect_me {\
         return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4
-    }
-}
-EOL
-
+https://www.youtube.com/watch?v=QH2-TGUlwu4;\
+    }' /etc/nginx/sites-available/default
 # Check Nginx configuration for syntax errors
 sudo nginx -t
 
