@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install and configure the nginx webserver with redirections and  a costumized notfound page
+#Install and configure the nginx webserver with redirections and  a costumized notfound page
 apt-get -y install nginx
 service nginx start
 ufw allow 'Nginx HTTP'
