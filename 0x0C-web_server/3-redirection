@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 # Update package lists
 sudo apt-get update
-
 # Install Nginx
 sudo apt-get install -y nginx
-
 # Create the HTML file to be served by Nginx
 echo "Hello World!" | sudo tee /var/www/html/index.html
-
 # Create a new Nginx server block configuration
-# Create the custom 404 error page
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
-
 # Add the redirect location using sed
 sudo sed -i '/server {/a \
     location /redirect_me {\
