@@ -11,21 +11,16 @@ echo "Hello World!" | sudo tee /var/www/html/index.html
 # Ensure Nginx is listening on port 80 (default configuration)
 sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
 
-# Create the custom 404 error page
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+#Give the user  ownership to website files
+chown -R $"USER":$"USER" /var/www/html
+chmod -R 755 /var/www
 
-# Modify the Nginx default server block configuration using sed
-sudo sed -i '/server {/a \
-    error_page 404 /custom_404.html;\
-    location = /custom_404.html {\
-        internal;\
-    }' /etc/nginx/sites-available/default
+# Redirect to /redirect_me to a youtube video
+sed -i '37i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
 
-# Add the redirect location using sed
-sudo sed -i '/server {/a \
-    location /redirect_me {\
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4
-;\
-    }' /etc/nginx/sites-available/default
+# Setup 404 page
+printf "Ceci n'est pas une page\n" >> /var/www/html/error_404.html
+sed -i '38i\error_page 404 /error_404.html;' /etc/nginx/sites-available/default
+
 service nginx restart
 
