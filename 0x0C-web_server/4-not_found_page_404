@@ -4,7 +4,6 @@ sudo apt-get update
 # Install Nginx
 sudo apt-get install -y nginx
 # Create the custom 404 error page
-# Create the custom 404 error page
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
 
 # Modify the Nginx default server block configuration using sed
