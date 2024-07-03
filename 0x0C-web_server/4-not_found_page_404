@@ -34,14 +34,6 @@ EOL
 # Check Nginx configuration for syntax errors
 sudo nginx -t
 
-# If the configuration is correct, reload Nginx to apply changes
-if [ $? -eq 0 ]; then
-    sudo nginx -s reload
-else
-    echo "Nginx configuration test failed. Exiting."
-    exit 1
-fi
-
 # Ensure the firewall allows traffic on port 80
 sudo ufw allow 'Nginx HTTP'
 
