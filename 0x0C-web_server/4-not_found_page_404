@@ -1,19 +1,26 @@
 #!/usr/bin/env bash
 #Install and configure the nginx webserver with redirections and  a costumized notfound page
 apt-get -y install nginx
+
 service nginx start
+
 ufw allow 'Nginx HTTP'
+
 echo "Hello World!" | sudo tee /var/www/html/index.html
+
 # Ensure Nginx is listening on port 80 (default configuration)
 sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+
 # Create the custom 404 error page
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+
 # Modify the Nginx default server block configuration using sed
 sudo sed -i '/server {/a \
     error_page 404 /custom_404.html;\
     location = /custom_404.html {\
         internal;\
     }' /etc/nginx/sites-available/default
+
 # Add the redirect location using sed
 sudo sed -i '/server {/a \
     location /redirect_me {\

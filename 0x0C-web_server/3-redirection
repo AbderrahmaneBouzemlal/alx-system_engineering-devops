@@ -6,11 +6,12 @@ ufw allow 'Nginx HTTP'
 echo "Hello World!" | sudo tee /var/www/html/index.html
 # Ensure Nginx is listening on port 80 (default configuration)
 sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
-# Add the redirect location using sed
-sudo sed -i '/server {/a \
-    location /redirect_me {\
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4
-;\
-    }' /etc/nginx/sites-available/default
+#Give the user  ownership to website files
+sudo chown -R $USER:$USER /var/www/html
+sudo chmod -R 755 /var/www
+
+# Redirect to /redirect_me to a youtube video
+sed -i '37i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
 service nginx restart
 
