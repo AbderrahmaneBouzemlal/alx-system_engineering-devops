@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 # Update and upgrade the system
 apt update
 apt upgrade -y
