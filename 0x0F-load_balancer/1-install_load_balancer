@@ -26,14 +26,14 @@ defaults
     timeout client  50000
     timeout server  50000
 
-frontend http_front
-    bind *:80
+frontend bouz.tech
+    bind 0:80
     default_backend http_back
 
 backend http_back
     balance roundrobin
-    server web-01 [STUDENT_ID]-web-01:80 check
-    server web-02 [STUDENT_ID]-web-02:80 check
+    server 518901-web-01 54.198.53.210:80 check
+    server 518901-web-02 52.23.212.104:80 check
 EOF
 
 # Enable HAProxy to start on boot
