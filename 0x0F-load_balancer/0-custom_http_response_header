@@ -2,6 +2,8 @@
 # Configures a new Ubuntu server with a custom HTTP header response
 
 #Install and configure the nginx webserver with redirections and  a costumized notfound page
+sudo apt-get update -y
+sudo apt-get upgrade -y
 apt-get -y install nginx
 
 service nginx start
