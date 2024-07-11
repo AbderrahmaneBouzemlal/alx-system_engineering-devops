@@ -1,14 +1,44 @@
-#!/usr/bin/env bash
-# Configures a new Ubuntu server with a HAproxy load-balancer
-apt-get -y install software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy
-apt-get -y update
-apt-get -y upgrade
-apt-get -y install haproxy
-sed -i '/errorfile 504/a listen thelaura' /etc/haproxy/haproxy.cfg
-sed -i '/listen thelaura/a         bind :80' /etc/haproxy/haproxy.cfg
-sed -i '/bind :80/a         mode http' /etc/haproxy/haproxy.cfg
-sed -i '/mode http/a         server 2154-web-01 104.196.50.234:80 check' /etc/haproxy/haproxy.cfg
-sed -i '/server 2154-web-01 104.196.50.234:80 check/a         server 2154-web-02 35.237.11.53:80 check' /etc/haproxy/haproxy.cfg
-sed -i '/#EXTRAOPTS="-de -m 16"/a ENABLED=1' /etc/default/haproxy
-service haproxy start
+#!/bin/bash
+
+# Update and upgrade the system
+apt update
+apt upgrade -y
+
+# Install HAProxy
+apt-get install -y haproxy
+
+# Configure HAProxy
+cat <<EOF > /etc/haproxy/haproxy.cfg
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+
+frontend http_front
+    bind *:80
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    server web-01 [STUDENT_ID]-web-01:80 check
+    server web-02 [STUDENT_ID]-web-02:80 check
+EOF
+
+# Enable HAProxy to start on boot
+sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
+
+# Restart HAProxy service to apply changes
+service haproxy restart
