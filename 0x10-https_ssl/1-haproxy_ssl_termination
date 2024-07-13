@@ -58,3 +58,10 @@ backend www-backend
 
 backend letsencrypt-backend
 	server letsencrypt 127.0.0.1:54321
+# Add a listen section for stats (optional but useful for monitoring)
+listen stats
+    bind *:8080
+    stats enable
+    stats uri /stats
+    stats refresh 30s
+    stats auth admin:admin
