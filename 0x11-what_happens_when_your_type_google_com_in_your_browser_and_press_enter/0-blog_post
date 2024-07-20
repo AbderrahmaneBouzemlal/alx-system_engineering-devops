@@ -20,7 +20,7 @@ Hey LinkedIn! 🌟 Today, I want to take you on a quick journey behind the scene
 
 🧩 Rendering: Your browser reconstructs the received elements, making the webpage displayed on your screen. You look at a blank screen, type the correct combination of letters, it’s almost a light-switch mystery, and the page is there.
 
-The next time that you find yourself opening a website, think about the sequence of activities that would make the website come to life in almost the blink of an eye. 
+In the realm of web browsing, introduction of the browser with single click of the “Enter” key opens an incredible world. Starting from the DNS requests up to the actual rendering of the web pages, there are so many aspects that are involved. Networks find DNS addresses, distribute load balancing, secure the path through firewalls, encrypt data with HTTPS/SSL, content from web/application servers, and your browser assembles the final Web page. Such a process ensures that the internet remains a useful and a constantly changing entity for everyone. 
 
 Thanks for reading! 🙌 If you liked this content you can contact me and share your opinion. 
 
