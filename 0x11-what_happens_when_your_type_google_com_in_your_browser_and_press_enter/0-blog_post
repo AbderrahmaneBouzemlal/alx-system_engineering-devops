@@ -1,0 +1,27 @@
+🚀 Ever Wonder What Happens When You Enter a Web Address? 🌐
+
+Hey LinkedIn! 🌟 Today, I want to take you on a quick journey behind the scenes of what happens when you type a web address like “https://www.google.com” into your browser and hit Enter. It’s a fascinating process that occurs in the blink of an eye. Here’s a brief rundown:
+
+🔍 Domain Name System (DNS) Request: Imagine your computer is writing a letter and wants to know the address to put on the envelope; so it checks in its telephone book and gets back the address for the URL: https://www.google.com. The DNS server sends back the IP address of the required site. 
+
+🤝 TCP/IP Handshake: Under this IP address, your computer creates a TCP connection to the server. This is like shaking hands, or making motions to make sure you and the server can talk. 
+
+🔒 Firewall Check: If you are lucky enough to have a firewall, it checks to see if the request is permissible. Perhaps the server you are connecting to also has its own firewall and it also does the check. 
+
+🔐 Secure Connection (HTTPS): Your browser ask the server for a secured SSL/TLS connection which means that all information transferred cannot be seen by another party. That’s why the “s” is put in the “https.” 
+
+⚖️ Load Balancer: Larger organizations are known to have several servers leading a request as is the case with Google. A load balancer works in a way of a traffic police moving your request to one of the servers. 
+
+📨 Request and Response: You make a request to your browser, it sends the request to load balancer who in return forwards the request to a server. The load balancer forwards the request to the server and the server processes the request and sends a response back through the load balancer to your browser. 
+
+🖥️ Webpage Components: It consists of response that is a composition of the HTML, CSS, and JavaScript that form the webpage. HTML defines the format of content, CSS adds beautiful view on it and JavaScript makes content active. 
+
+📊 Dynamic Content: If there is a dynamic content like a search result that has the user’s name on top, the server can retrieve data from a database and then combine it or simply reply to the browser with the data. 
+
+🧩 Rendering: Your browser reconstructs the received elements, making the webpage displayed on your screen. You look at a blank screen, type the correct combination of letters, it’s almost a light-switch mystery, and the page is there.
+
+The next time that you find yourself opening a website, think about the sequence of activities that would make the website come to life in almost the blink of an eye. 
+
+Thanks for reading! 🙌 If you liked this content you can contact me and share your opinion. 
+
+#WebDevelopment #TechInsights #FirstPost #LearningJourney
