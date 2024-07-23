@@ -1,34 +1,8 @@
 #!/usr/bin/env bash
-# Create the nginx user if it doesn't exist
-if ! id -u nginx &> /dev/null; then
-    echo "Creating nginx user..."
-    sudo useradd -r -s /bin/false nginx
-else
-    echo "Nginx user already exists."
-fi
+#Make Nginx running as the nginx user.
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+chmod 644 /etc/nginx/nginx.conf
+pkill apache2
+sudo -u nginx service nginx start
 
-# Update the nginx configuration to run as the nginx user
-NGINX_CONF="/etc/nginx/nginx.conf"
-if grep -q "user nginx;" "$NGINX_CONF"; then
-    echo "Nginx is already configured to run as the nginx user."
-else
-    echo "Configuring Nginx to run as the nginx user..."
-    sudo sed -i 's/^user .*/user nginx;/' "$NGINX_CONF"
-fi
-
-# Update the nginx configuration to listen on port 8080
-DEFAULT_CONF="/etc/nginx/sites-available/default"
-if grep -q "listen 8080;" "$DEFAULT_CONF"; then
-    echo "Nginx is already configured to listen on port 8080."
-else
-    echo "Configuring Nginx to listen on port 8080..."
-    sudo sed -i 's/listen 80;/listen 8080;/' "$DEFAULT_CONF"
-fi
-
-# Ensure nginx is running
-echo "Restarting Nginx..."
-sudo systemctl restart nginx
-
-# Check the status of nginx
-echo "Nginx status:"
-sudo systemctl status nginx
