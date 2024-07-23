@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 #Run as another user
-runuser -l $1 -c 'whoami'
+runuser -l "$1" -c 'whoami'
+
