@@ -9,12 +9,11 @@ import requests
 from sys import argv
 
 
-argc = len(argv)
 EMPLOYEE_ID = argv[1]
 url = "https://jsonplaceholder.typicode.com/users/"
 
 
-def main():
+if __name__ == '__main__':
     """returns information about his/her TODO list progress"""
     res = requests.get(f"{url}{EMPLOYEE_ID}")
     response = requests.get(f"{url}{EMPLOYEE_ID}/todos")
@@ -29,7 +28,3 @@ def main():
         total += 1
     print(f"Employee {name} is done with tasks({done}/{total}):")
     print(TASK_TITLES, end='')
-
-
-if __name__ == '__main__':
-    main()
