@@ -6,10 +6,10 @@ for a given employee ID,
 returns information about his/her TODO list progress.
 """
 import requests
-from sys import argv
+import sys
 
 
-EMPLOYEE_ID = argv[1]
+EMPLOYEE_ID = sys.argv[1]
 url = "https://jsonplaceholder.typicode.com/users/"
 
 
