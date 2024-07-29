@@ -27,5 +27,9 @@ if __name__ == '__main__':
         todo['username'] = username
         data.append(todo)
     with open(f"{EMPLOYEE_ID}.csv", 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        writer = csv.DictWriter(
+            csvfile,
+            fieldnames=field_names,
+            quoting=csv.QUOTE_ALL
+            )
         writer.writerows(data)
